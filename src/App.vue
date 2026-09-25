@@ -54,9 +54,10 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); clearIntro
       <div class="hud-heading"><span class="hud-symbol" aria-hidden="true">✦</span><div><b>EL GREMIO DE LOS DRAGONES</b><span>ALDEA DE ARTHEN</span></div></div>
       <div class="hud-line"></div>
       <div class="quest-title"><span class="quest-symbol" aria-hidden="true">!</span><div><small>DIARIO DE MISIÓN</small><strong>{{ game.quest ? 'Sangre en el camino' : 'Habla con Aldric' }}</strong></div></div>
-      <small class="controls">Muévete: WASD / flechas · Hablar: E<br>En móvil: toca el suelo o a Aldric</small>
+      <small class="controls">Muévete: WASD / flechas · Hablar: E · Espada: Espacio / J<br>En móvil: toca el suelo o a Aldric</small>
       <button class="music-button hud-music" :aria-label="muted ? 'Activar música' : 'Silenciar música'" @click="toggleMusic()">{{ muted ? '♪ Activar música' : '♫ Silenciar música' }}</button>
     </header>
+    <button v-if="game.started" class="attack-button" aria-label="Atacar con la espada" @pointerdown.stop @click.stop="game.attack()">⚔<span>ATACAR</span></button>
     <div v-if="game.dialogue" class="dialogue-backdrop" @click.self="game.closeDialogue()">
       <section class="dialogue" role="dialog" aria-modal="true" aria-label="Conversación con Aldric">
         <div class="dialogue-header"><span class="npc-seal" aria-hidden="true">✦</span><div><small>HABITANTE DE ARTHEN</small><h2>Aldric</h2></div><button class="close" aria-label="Cerrar diálogo" @click="game.closeDialogue()">×</button></div>

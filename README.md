@@ -10,6 +10,8 @@ Al pulsar «Nueva partida» aparece una introducción ilustrada de tres escenas 
 
 La introducción y la aldea tienen melodías instrumentales suaves distintas, generadas con Web Audio (cuerda pulsada, flauta y bordón). La música arranca al pulsar «Nueva partida» y se puede silenciar o reactivar durante la introducción y desde el panel de la aldea. No se descargan pistas de terceros.
 
+En la aldea, Espacio o J hacen que Ethan blanda una espada; en móvil se usa el botón «Atacar». Es un movimiento visual sin daño por ahora. Una pequeña musaraña de identidad desconocida pasea con la etiqueta «???». El suelo continuo sustituye a las antiguas piezas rectangulares; las piernas de Ethan se mueven al caminar.
+
 ## Alcance
 
 Reconstrucción desde el chat de la V0.1.2a y los recursos originales. El código local anterior no está disponible y puede diferir. El diálogo inicia la misión; todavía no tiene objetivos jugables, guardado, combate ni personajes definitivos.
