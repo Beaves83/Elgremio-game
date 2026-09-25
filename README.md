@@ -8,6 +8,8 @@ Juego web con Vue 3, TypeScript, Pinia y Phaser. Ethan explora la Aldea de Arthe
 
 Al pulsar «Nueva partida» aparece una introducción ilustrada de tres escenas sobre Ethan y sus padres en las Tierras Antiguas. Avanza cada siete segundos, permite pasar manualmente y ofrece «Saltar introducción» desde el inicio.
 
+La introducción y la aldea tienen melodías instrumentales suaves distintas, generadas con Web Audio (cuerda pulsada, flauta y bordón). La música arranca al pulsar «Nueva partida» y se puede silenciar o reactivar durante la introducción y desde el panel de la aldea. No se descargan pistas de terceros.
+
 ## Alcance
 
 Reconstrucción desde el chat de la V0.1.2a y los recursos originales. El código local anterior no está disponible y puede diferir. El diálogo inicia la misión; todavía no tiene objetivos jugables, guardado, combate ni personajes definitivos.

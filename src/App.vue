@@ -2,7 +2,9 @@
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { useGameStore } from './stores/game'
 import GameCanvas from './components/GameCanvas.vue'
+import { gameMusic } from './audio/music'
 const game = useGameStore()
+const muted = ref(gameMusic.muted)
 const intro = [
   { image: '/assets/game/intro/home.webp', heading: 'Un hogar en las Tierras Antiguas', text: 'Ethan creció en una casa junto a sus padres, entre los cuidados de cada día y las historias contadas al caer la tarde.' },
   { image: '/assets/game/intro/lessons.webp', heading: 'Aprender a mirar', text: 'Su padre lo llevaba al bosque para enseñarle a cazar: reconocer huellas, escuchar el viento y moverse sin hacer ruido.' },
@@ -13,9 +15,10 @@ const introIndex = ref(0)
 let introTimer: ReturnType<typeof setTimeout> | undefined
 function clearIntroTimer() { if (introTimer) clearTimeout(introTimer); introTimer = undefined }
 function scheduleIntro() { clearIntroTimer(); introTimer = setTimeout(nextIntro, 7000) }
-function beginIntro() { introIndex.value = 0; introActive.value = true; scheduleIntro() }
-function finishIntro() { clearIntroTimer(); introActive.value = false; game.start() }
+function beginIntro() { introIndex.value = 0; introActive.value = true; gameMusic.play('intro'); scheduleIntro() }
+function finishIntro() { clearIntroTimer(); introActive.value = false; game.start(); gameMusic.play('village') }
 function nextIntro() { if (introIndex.value < intro.length - 1) { introIndex.value++; scheduleIntro() } else finishIntro() }
+function toggleMusic() { muted.value = gameMusic.toggleMute() }
 const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') game.closeDialogue() }
 onMounted(() => window.addEventListener('keydown', onKey))
 onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); clearIntroTimer() })
@@ -39,6 +42,7 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); clearIntro
       <Transition name="intro-fade" mode="out-in"><img :key="introIndex" class="intro-image" :src="intro[introIndex]!.image" alt="" /></Transition>
       <div class="intro-shade"></div>
       <button class="skip-intro" @click="finishIntro()">Saltar introducción <span aria-hidden="true">✕</span></button>
+      <button class="music-button intro-music" :aria-label="muted ? 'Activar música' : 'Silenciar música'" @click="toggleMusic()">{{ muted ? '♪ Música desactivada' : '♫ Música activada' }}</button>
       <div class="intro-caption" aria-live="polite">
         <span class="intro-kicker">EL ORIGEN DE ETHAN · {{ introIndex + 1 }} / {{ intro.length }}</span>
         <h2>{{ intro[introIndex]!.heading }}</h2>
@@ -51,6 +55,7 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); clearIntro
       <div class="hud-line"></div>
       <div class="quest-title"><span class="quest-symbol" aria-hidden="true">!</span><div><small>DIARIO DE MISIÓN</small><strong>{{ game.quest ? 'Sangre en el camino' : 'Habla con Aldric' }}</strong></div></div>
       <small class="controls">Muévete: WASD / flechas · Hablar: E<br>En móvil: toca el suelo o a Aldric</small>
+      <button class="music-button hud-music" :aria-label="muted ? 'Activar música' : 'Silenciar música'" @click="toggleMusic()">{{ muted ? '♪ Activar música' : '♫ Silenciar música' }}</button>
     </header>
     <div v-if="game.dialogue" class="dialogue-backdrop" @click.self="game.closeDialogue()">
       <section class="dialogue" role="dialog" aria-modal="true" aria-label="Conversación con Aldric">
