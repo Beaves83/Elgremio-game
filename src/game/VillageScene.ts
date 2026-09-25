@@ -13,9 +13,11 @@ const objects: [string,number,number,number][] = [
 ]
 const terrain=['grass','grass-flowers','dirt','cobblestone']
 export class VillageScene extends Phaser.Scene {
-  private ethan!: Phaser.GameObjects.Rectangle
+  private ethan!: Phaser.GameObjects.Image
   private ethanLabel!: Phaser.GameObjects.Text
-  private aldric!: Phaser.GameObjects.Rectangle
+  private ethanShadow!: Phaser.GameObjects.Ellipse
+  private aldric!: Phaser.GameObjects.Image
+  private questMarker!: Phaser.GameObjects.Container
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
   private wasd!: Record<'W'|'A'|'S'|'D', Phaser.Input.Keyboard.Key>
   private obstacles: Phaser.Geom.Rectangle[]=[]
@@ -24,6 +26,8 @@ export class VillageScene extends Phaser.Scene {
   preload(){
     for(const name of terrain)this.load.image(`terrain/${name}`,`/assets/game/terrain/${name}.png`)
     for(const [name] of objects)this.load.image(name,`/assets/game/${name}.png`)
+    this.load.image('character/ethan','/assets/game/characters/ethan.png')
+    this.load.image('character/aldric','/assets/game/characters/aldric.png')
   }
   create(){
     this.cameras.main.setBackgroundColor('#658359')
@@ -39,10 +43,16 @@ export class VillageScene extends Phaser.Scene {
       if(name.startsWith('buildings/')||name.includes('tree-')||name.endsWith('/well'))
         this.obstacles.push(new Phaser.Geom.Rectangle(x-42*scale,y-38*scale,84*scale,38*scale))
     }
-    this.ethan=this.add.rectangle(920,1020,26,40,0x244252).setStrokeStyle(3,0xe9d6a7).setDepth(1020)
-    this.ethanLabel=this.add.text(920,978,'ETHAN',{font:'bold 13px Georgia',color:'#fff1cb'}).setOrigin(.5).setDepth(2000)
-    this.aldric=this.add.rectangle(1160,1130,26,38,0x76522d).setStrokeStyle(3,0xf7cc80).setDepth(1130)
-    this.add.text(1160,1088,'ALDRIC · E',{font:'bold 13px Georgia',color:'#fff1cb'}).setOrigin(.5).setDepth(2000)
+    this.ethanShadow=this.add.ellipse(920,1020,44,13,0x10221d,.43).setDepth(1019)
+    this.ethan=this.add.image(920,1020,'character/ethan').setOrigin(.5,1).setDisplaySize(51,108).setDepth(1020)
+    this.ethanLabel=this.add.text(920,896,'ETHAN',{font:'bold 13px Georgia',color:'#fff1cb',backgroundColor:'#17221dd9',padding:{x:8,y:4}}).setOrigin(.5).setDepth(2000)
+    this.add.ellipse(1160,1130,44,13,0x10221d,.43).setDepth(1129)
+    this.aldric=this.add.image(1160,1130,'character/aldric').setOrigin(.5,1).setDisplaySize(51,110).setDepth(1130)
+    this.add.text(1160,1004,'ALDRIC',{font:'bold 13px Georgia',color:'#fff1cb',backgroundColor:'#17221dd9',padding:{x:8,y:4}}).setOrigin(.5).setDepth(2000)
+    const emblem=this.add.circle(0,0,19,0x8d632b).setStrokeStyle(2,0xf9d887)
+    const glyph=this.add.text(0,-1,'!',{font:'bold 28px Georgia',color:'#fff3bf'}).setOrigin(.5)
+    this.questMarker=this.add.container(1160,967,[emblem,glyph]).setDepth(2001)
+    this.tweens.add({targets:this.questMarker,y:959,duration:850,yoyo:true,repeat:-1,ease:'Sine.easeInOut'})
     this.cameras.main.setBounds(0,0,world.width,world.height).startFollow(this.ethan,true,.12,.12).setZoom(1.08)
     this.cursors=this.input.keyboard!.createCursorKeys()
     this.wasd=this.input.keyboard!.addKeys('W,A,S,D') as typeof this.wasd
@@ -55,6 +65,7 @@ export class VillageScene extends Phaser.Scene {
   }
   private talk(){if(Phaser.Math.Distance.Between(this.ethan.x,this.ethan.y,this.aldric.x,this.aldric.y)<110)useGameStore().speak()}
   update(_time:number,delta:number){
+    this.questMarker.setVisible(!useGameStore().quest)
     if(useGameStore().dialogue)return
     let dx=Number(this.cursors.right.isDown||this.wasd.D.isDown)-Number(this.cursors.left.isDown||this.wasd.A.isDown)
     let dy=Number(this.cursors.down.isDown||this.wasd.S.isDown)-Number(this.cursors.up.isDown||this.wasd.W.isDown)
@@ -67,7 +78,8 @@ export class VillageScene extends Phaser.Scene {
     const y=Phaser.Math.Clamp(this.ethan.y+dy/norm*speed,25,world.height-10)
     if(!this.obstacles.some(o=>o.contains(x,y))){
       this.ethan.setPosition(x,y).setDepth(y)
-      this.ethanLabel.setPosition(x,y-42)
+      this.ethanShadow.setPosition(x,y).setDepth(y-1)
+      this.ethanLabel.setPosition(x,y-124)
     }
   }
 }
