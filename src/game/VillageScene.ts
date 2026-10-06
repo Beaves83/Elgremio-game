@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 import { useGameStore } from '../stores/game'
 
-const world = { width: 1800, height: 1400 }
+const world = { width: 1900, height: 1500 }
 
 type CollisionKind = 'house' | 'tree' | 'well'
 
@@ -14,40 +14,40 @@ type StaticObject = {
 }
 
 const objects: StaticObject[] = [
-  { name: 'buildings/house-01', x: 350, y: 590, scale: .92, collision: 'house' },
-  { name: 'buildings/house-02', x: 1450, y: 575, scale: .93, collision: 'house' },
-  { name: 'buildings/house-03', x: 350, y: 1280, scale: .94, collision: 'house' },
-  { name: 'buildings/house-01', x: 1460, y: 1280, scale: .91, collision: 'house' },
+  { name: 'buildings/house-01', x: 470, y: 610, scale: .84, collision: 'house' },
+  { name: 'buildings/house-02', x: 1430, y: 600, scale: .86, collision: 'house' },
+  { name: 'buildings/house-03', x: 470, y: 1350, scale: .87, collision: 'house' },
+  { name: 'buildings/house-01', x: 1435, y: 1350, scale: .84, collision: 'house' },
 
-  { name: 'environment/tree-01', x: 120, y: 650, scale: .95, collision: 'tree' },
-  { name: 'environment/tree-02', x: 250, y: 420, scale: .9, collision: 'tree' },
-  { name: 'environment/tree-01', x: 1650, y: 430, scale: .92, collision: 'tree' },
-  { name: 'environment/tree-02', x: 1720, y: 760, scale: .92, collision: 'tree' },
-  { name: 'environment/tree-01', x: 180, y: 1190, scale: .94, collision: 'tree' },
-  { name: 'environment/tree-02', x: 1640, y: 1210, scale: .96, collision: 'tree' },
+  { name: 'environment/tree-01', x: 185, y: 675, scale: .92, collision: 'tree' },
+  { name: 'environment/tree-02', x: 290, y: 410, scale: .86, collision: 'tree' },
+  { name: 'environment/tree-01', x: 1660, y: 425, scale: .9, collision: 'tree' },
+  { name: 'environment/tree-02', x: 1730, y: 785, scale: .88, collision: 'tree' },
+  { name: 'environment/tree-01', x: 220, y: 1240, scale: .9, collision: 'tree' },
+  { name: 'environment/tree-02', x: 1650, y: 1250, scale: .92, collision: 'tree' },
 
-  { name: 'environment/well', x: 900, y: 805, scale: .82, collision: 'well' },
-  { name: 'environment/cart', x: 650, y: 1180, scale: .82 },
-  { name: 'environment/signpost', x: 780, y: 690, scale: .78 },
-  { name: 'environment/notice-board', x: 1210, y: 690, scale: .8 },
-  { name: 'environment/bench', x: 720, y: 970, scale: .86 },
-  { name: 'environment/bench', x: 1220, y: 970, scale: .86 },
-  { name: 'environment/lamp', x: 650, y: 820, scale: .8 },
-  { name: 'environment/lamp', x: 1320, y: 820, scale: .8 },
-  { name: 'environment/barrel', x: 510, y: 685, scale: .78 },
-  { name: 'environment/crates-02', x: 1530, y: 735, scale: .74 },
-  { name: 'environment/fence-01', x: 220, y: 870, scale: .9 },
-  { name: 'environment/fence-01', x: 315, y: 870, scale: .9 },
-  { name: 'environment/fence-01', x: 1490, y: 920, scale: .9 },
-  { name: 'environment/fence-01', x: 1585, y: 920, scale: .9 },
-  { name: 'environment/wood-pile', x: 1580, y: 1120, scale: .78 },
-  { name: 'environment/hay', x: 1510, y: 1040, scale: .78 },
-  { name: 'environment/bush-01', x: 520, y: 790, scale: .74 },
-  { name: 'environment/bush-02', x: 1420, y: 1000, scale: .74 },
-  { name: 'environment/rock-01', x: 280, y: 1070, scale: .68 },
-  { name: 'environment/rock-02', x: 1530, y: 1320, scale: .72 },
-  { name: 'environment/flower-box', x: 470, y: 620, scale: .7 },
-  { name: 'environment/flower-box', x: 1350, y: 605, scale: .7 },
+  { name: 'environment/well', x: 950, y: 810, scale: .78, collision: 'well' },
+  { name: 'environment/cart', x: 690, y: 1210, scale: .78 },
+  { name: 'environment/signpost', x: 805, y: 700, scale: .76 },
+  { name: 'environment/notice-board', x: 1235, y: 700, scale: .77 },
+  { name: 'environment/bench', x: 750, y: 990, scale: .82 },
+  { name: 'environment/bench', x: 1250, y: 990, scale: .82 },
+  { name: 'environment/lamp', x: 665, y: 830, scale: .76 },
+  { name: 'environment/lamp', x: 1340, y: 830, scale: .76 },
+  { name: 'environment/barrel', x: 550, y: 715, scale: .74 },
+  { name: 'environment/crates-02', x: 1515, y: 745, scale: .72 },
+  { name: 'environment/fence-01', x: 260, y: 905, scale: .86 },
+  { name: 'environment/fence-01', x: 355, y: 905, scale: .86 },
+  { name: 'environment/fence-01', x: 1500, y: 945, scale: .86 },
+  { name: 'environment/fence-01', x: 1595, y: 945, scale: .86 },
+  { name: 'environment/wood-pile', x: 1580, y: 1140, scale: .76 },
+  { name: 'environment/hay', x: 1515, y: 1060, scale: .76 },
+  { name: 'environment/bush-01', x: 585, y: 805, scale: .72 },
+  { name: 'environment/bush-02', x: 1420, y: 1035, scale: .72 },
+  { name: 'environment/rock-01', x: 330, y: 1110, scale: .66 },
+  { name: 'environment/rock-02', x: 1530, y: 1380, scale: .69 },
+  { name: 'environment/flower-box', x: 575, y: 645, scale: .67 },
+  { name: 'environment/flower-box', x: 1320, y: 635, scale: .67 },
 ]
 
 function makeGround(scene: Phaser.Scene) {
@@ -63,12 +63,12 @@ function makeGround(scene: Phaser.Scene) {
   ctx.fillStyle = '#66834f'
   ctx.fillRect(0, 0, world.width, world.height)
 
-  for (let i = 0; i < 15500; i++) {
+  for (let i = 0; i < 16500; i++) {
     const x = random() * world.width
     const y = random() * world.height
     ctx.fillStyle = random() < .5 ? '#86a76925' : '#263d2b19'
     ctx.beginPath()
-    ctx.ellipse(x, y, 2 + random() * 19, 1 + random() * 9, random() * 6, 0, Math.PI * 2)
+    ctx.ellipse(x, y, 2 + random() * 18, 1 + random() * 8, random() * 6, 0, Math.PI * 2)
     ctx.fill()
   }
 
@@ -78,7 +78,7 @@ function makeGround(scene: Phaser.Scene) {
     ctx.lineCap = 'round'
     ctx.lineJoin = 'round'
 
-    for (const [width, color] of [[212, '#506941'], [188, '#816d4b'], [166, '#9a8056'], [143, '#ac9063']] as const) {
+    for (const [width, color] of [[222, '#506941'], [194, '#816d4b'], [170, '#9a8056'], [146, '#ac9063']] as const) {
       ctx.lineWidth = width
       ctx.strokeStyle = color
       ctx.stroke()
@@ -89,25 +89,25 @@ function makeGround(scene: Phaser.Scene) {
 
   road(() => {
     ctx.beginPath()
-    ctx.moveTo(-40, 875)
-    ctx.bezierCurveTo(445, 852, 750, 896, 1100, 871)
-    ctx.bezierCurveTo(1450, 848, 1650, 883, 1840, 865)
+    ctx.moveTo(-40, 900)
+    ctx.bezierCurveTo(450, 880, 790, 920, 1150, 892)
+    ctx.bezierCurveTo(1490, 870, 1710, 905, 1940, 890)
   })
 
   road(() => {
     ctx.beginPath()
-    ctx.moveTo(890, -40)
-    ctx.bezierCurveTo(905, 370, 861, 685, 896, 950)
-    ctx.bezierCurveTo(919, 1160, 889, 1300, 905, 1440)
+    ctx.moveTo(950, -40)
+    ctx.bezierCurveTo(965, 380, 925, 680, 950, 990)
+    ctx.bezierCurveTo(970, 1210, 945, 1360, 955, 1540)
   })
 
-  for (let i = 0; i < 10500; i++) {
+  for (let i = 0; i < 11000; i++) {
     const x = random() * world.width
     const y = random() * world.height
 
     if (
-      Math.abs(y - (875 - 12 * Math.sin(x / 190))) > 72 &&
-      Math.abs(x - (895 + 17 * Math.sin(y / 220))) > 70
+      Math.abs(y - (900 - 12 * Math.sin(x / 190))) > 76 &&
+      Math.abs(x - (950 + 17 * Math.sin(y / 220))) > 73
     ) {
       continue
     }
@@ -118,11 +118,11 @@ function makeGround(scene: Phaser.Scene) {
     ctx.fill()
   }
 
-  for (let i = 0; i < 3100; i++) {
+  for (let i = 0; i < 3300; i++) {
     const x = random() * world.width
     const y = random() * world.height
 
-    if (Math.abs(y - 875) < 107 || Math.abs(x - 895) < 102) continue
+    if (Math.abs(y - 900) < 112 || Math.abs(x - 950) < 108) continue
 
     ctx.strokeStyle = random() < .6 ? '#334f30a8' : '#a7b970b0'
     ctx.lineWidth = 1 + random() * 1.5
@@ -163,18 +163,17 @@ export class VillageScene extends Phaser.Scene {
 
   private obstacles: Phaser.Geom.Rectangle[] = []
   private destination: Phaser.Math.Vector2 | null = null
-  private feet = { x: 920, y: 970 }
-  private velocity = new Phaser.Math.Vector2(0, 0)
+  private feet = { x: 950, y: 1030 }
   private facing = 1
   private attackSeen = 0
   private nextAttack = 0
 
-  private shrewTarget = { x: 1020, y: 1160 }
+  private shrewTarget = { x: 1040, y: 1190 }
   private shrewPause = 0
   private nextDust = 0
 
-  private readonly maxSpeed = 165
-  private readonly playerRadius = 15
+  private readonly moveSpeed = 155
+  private readonly playerRadius = 17
 
   constructor() {
     super('VillageScene')
@@ -205,7 +204,7 @@ export class VillageScene extends Phaser.Scene {
       }
 
       if (object.name.endsWith('/well')) {
-        image.setDepth(object.y + 4)
+        image.setDepth(object.y + 5)
       }
     }
 
@@ -216,7 +215,7 @@ export class VillageScene extends Phaser.Scene {
     this.ethan = this.add
       .image(this.feet.x, this.feet.y, 'character/ethan')
       .setOrigin(.5, 1)
-      .setDisplaySize(66, 140)
+      .setDisplaySize(64, 136)
       .setDepth(this.feet.y)
 
     this.ethanLabel = this.add
@@ -232,17 +231,17 @@ export class VillageScene extends Phaser.Scene {
     this.makeSword()
 
     this.aldric = this.add
-      .image(1140, 1010, 'character/aldric')
+      .image(1180, 1050, 'character/aldric')
       .setOrigin(.5, 1)
       .setDisplaySize(62, 134)
-      .setDepth(1010)
+      .setDepth(1050)
 
     this.add
-      .ellipse(1140, 1011, 41, 11, 0x182819, .32)
-      .setDepth(1008)
+      .ellipse(1180, 1051, 41, 11, 0x182819, .32)
+      .setDepth(1048)
 
     this.add
-      .text(1140, 858, 'ALDRIC', {
+      .text(1180, 898, 'ALDRIC', {
         font: 'bold 12px Georgia',
         color: '#fff1cb',
         backgroundColor: '#17221dcc',
@@ -252,7 +251,7 @@ export class VillageScene extends Phaser.Scene {
       .setDepth(4000)
 
     this.questHalo = this.add
-      .circle(1140, 840, 26, 0xffd37a, .16)
+      .circle(1180, 880, 26, 0xffd37a, .16)
       .setDepth(4001)
 
     const marker = this.add.circle(0, 0, 20, 0x9e6728).setStrokeStyle(3, 0xffe5a0)
@@ -265,12 +264,12 @@ export class VillageScene extends Phaser.Scene {
     }).setOrigin(.5)
 
     this.questMarker = this.add
-      .container(1140, 838, [marker, glyph, label])
+      .container(1180, 878, [marker, glyph, label])
       .setDepth(4002)
 
     this.tweens.add({
       targets: this.questMarker,
-      y: 830,
+      y: 870,
       duration: 900,
       yoyo: true,
       repeat: -1,
@@ -286,19 +285,25 @@ export class VillageScene extends Phaser.Scene {
       repeat: -1,
     })
 
-    this.shrewShadow = this.add.ellipse(1030, 1190, 27, 7, 0x182819, .32)
-    this.shrew = this.add.image(1030, 1190, 'character/unknown-shrew').setOrigin(.5, 1).setDisplaySize(64, 42)
-    this.shrewLabel = this.add.text(1030, 1130, '???', {
+    this.shrewShadow = this.add.ellipse(1040, 1220, 27, 7, 0x182819, .32)
+    this.shrew = this.add
+      .image(1040, 1220, 'character/unknown-shrew')
+      .setOrigin(.5, 1)
+      .setDisplaySize(64, 42)
+
+    this.shrewLabel = this.add.text(1040, 1160, '???', {
       font: 'bold 12px Georgia',
       color: '#fff0bf',
       backgroundColor: '#1b281fc9',
       padding: { x: 5, y: 2 },
     }).setOrigin(.5).setDepth(4000)
 
+    const portrait = this.scale.height > this.scale.width
+
     this.cameras.main
       .setBounds(0, 0, world.width, world.height)
-      .startFollow(this.ethan, true, .085, .085)
-      .setZoom(1)
+      .startFollow(this.ethan, true, .14, .14)
+      .setZoom(portrait ? .8 : .96)
 
     this.cursors = this.input.keyboard!.createCursorKeys()
     this.wasd = this.input.keyboard!.addKeys('W,A,S,D') as typeof this.wasd
@@ -313,7 +318,7 @@ export class VillageScene extends Phaser.Scene {
     this.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
       const p = pointer.positionToCamera(this.cameras.main) as Phaser.Math.Vector2
 
-      if (Phaser.Math.Distance.Between(p.x, p.y, this.aldric.x, this.aldric.y) < 65) {
+      if (Phaser.Math.Distance.Between(p.x, p.y, this.aldric.x, this.aldric.y) < 70) {
         this.talk()
         return
       }
@@ -329,26 +334,51 @@ export class VillageScene extends Phaser.Scene {
     const y = image.y
 
     if (type === 'house') {
-      const width = Math.min(image.displayWidth * .78, 245)
-      const height = Math.min(image.displayHeight * .58, 140)
-      this.obstacles.push(new Phaser.Geom.Rectangle(x - width / 2, y - height, width, height))
+      const width = Math.min(image.displayWidth * .9, 285)
+      const height = Math.min(image.displayHeight * .9, 230)
+
+      this.obstacles.push(
+        new Phaser.Geom.Rectangle(
+          x - width / 2,
+          y - height,
+          width,
+          height,
+        ),
+      )
       return
     }
 
     if (type === 'tree') {
-      const width = Math.min(image.displayWidth * .70, 105)
-      const height = Math.min(image.displayHeight * .78, 140)
-      this.obstacles.push(new Phaser.Geom.Rectangle(x - width / 2, y - height, width, height))
+      const width = Math.min(image.displayWidth * .72, 125)
+      const height = Math.min(image.displayHeight * .74, 155)
+
+      this.obstacles.push(
+        new Phaser.Geom.Rectangle(
+          x - width / 2,
+          y - height,
+          width,
+          height,
+        ),
+      )
       return
     }
 
-    const width = Math.min(image.displayWidth * .80, 105)
-    const height = Math.min(image.displayHeight * .70, 88)
-    this.obstacles.push(new Phaser.Geom.Rectangle(x - width / 2, y - height, width, height))
+    const width = Math.min(image.displayWidth * .86, 115)
+    const height = Math.min(image.displayHeight * .78, 96)
+
+    this.obstacles.push(
+      new Phaser.Geom.Rectangle(
+        x - width / 2,
+        y - height,
+        width,
+        height,
+      ),
+    )
   }
 
   private makeSword() {
     const g = this.add.graphics()
+
     g.fillStyle(0x704727)
     g.fillRoundedRect(-3, -4, 6, 19, 2)
     g.fillStyle(0xe9bd69)
@@ -360,6 +390,7 @@ export class VillageScene extends Phaser.Scene {
     g.lineBetween(0, -12, 0, -61)
 
     this.sword = this.add.container(0, 0, [g]).setDepth(1100).setAngle(20)
+
     this.swing = this.add
       .arc(0, 0, 56, 210, 320, false, 0xffffff, 0)
       .setStrokeStyle(8, 0xf6e3b0, .85)
@@ -368,13 +399,14 @@ export class VillageScene extends Phaser.Scene {
 
   private attack() {
     const now = this.time.now
+
     if (useGameStore().dialogue || now < this.nextAttack) return
 
     this.nextAttack = now + 410
     this.destination = null
-    this.velocity.scale(.25)
 
     this.sword.setAngle(-70 * this.facing).setScale(this.facing, 1)
+
     this.swing
       .setPosition(this.feet.x + this.facing * 17, this.feet.y - 67)
       .setScale(this.facing, 1)
@@ -408,37 +440,35 @@ export class VillageScene extends Phaser.Scene {
   }
 
   private talk() {
-    if (Phaser.Math.Distance.Between(this.feet.x, this.feet.y, this.aldric.x, this.aldric.y) < 112) {
+    if (Phaser.Math.Distance.Between(this.feet.x, this.feet.y, this.aldric.x, this.aldric.y) < 118) {
       this.destination = null
-      this.velocity.set(0, 0)
       useGameStore().speak()
     }
   }
 
   private positionEthan(time: number, moving: boolean) {
-    const walk = moving ? Math.sin(time * .012) : 0
-    const bob = moving ? Math.abs(walk) * .8 : Math.sin(time * .002) * .22
+    const gait = moving ? Math.sin(time * .014) : 0
+    const bob = moving ? Math.abs(gait) * .42 : Math.sin(time * .002) * .15
 
     this.ethan
       .setPosition(this.feet.x, this.feet.y - bob)
       .setFlipX(this.facing < 0)
-      .setAngle(moving ? walk * .35 : 0)
+      .setAngle(moving ? gait * .18 : 0)
       .setDepth(this.feet.y)
 
     this.ethanShadow
       .setPosition(this.feet.x, this.feet.y)
-      .setScale(1 - Math.abs(walk) * .025, 1)
       .setDepth(this.feet.y - 2)
 
     this.sword
       .setPosition(this.feet.x + this.facing * 17, this.feet.y - 64 - bob)
       .setDepth(this.feet.y + 1)
 
-    this.ethanLabel.setPosition(this.feet.x, this.feet.y - 150 - bob)
+    this.ethanLabel.setPosition(this.feet.x, this.feet.y - 148 - bob)
   }
 
   private canStandAt(x: number, y: number) {
-    const feetCircle = new Phaser.Geom.Circle(x, y - 9, this.playerRadius)
+    const feetCircle = new Phaser.Geom.Circle(x, y - 10, this.playerRadius)
 
     return !this.obstacles.some((obstacle) =>
       Phaser.Geom.Intersects.CircleToRectangle(feetCircle, obstacle),
@@ -447,22 +477,18 @@ export class VillageScene extends Phaser.Scene {
 
   private movePlayer(dx: number, dy: number) {
     if (dx !== 0) {
-      const nextX = Phaser.Math.Clamp(this.feet.x + dx, 22, world.width - 22)
+      const nextX = Phaser.Math.Clamp(this.feet.x + dx, 24, world.width - 24)
 
       if (this.canStandAt(nextX, this.feet.y)) {
         this.feet.x = nextX
-      } else {
-        this.velocity.x = 0
       }
     }
 
     if (dy !== 0) {
-      const nextY = Phaser.Math.Clamp(this.feet.y + dy, 35, world.height - 16)
+      const nextY = Phaser.Math.Clamp(this.feet.y + dy, 40, world.height - 18)
 
       if (this.canStandAt(this.feet.x, nextY)) {
         this.feet.y = nextY
-      } else {
-        this.velocity.y = 0
       }
     }
   }
@@ -476,8 +502,8 @@ export class VillageScene extends Phaser.Scene {
       const radius = 50 + (Math.sin(time * .0008) + 1) * 75
 
       this.shrewTarget = {
-        x: Phaser.Math.Clamp(this.shrew.x + Math.cos(angle) * radius, 300, 1510),
-        y: Phaser.Math.Clamp(this.shrew.y + Math.sin(angle) * radius, 1000, 1300),
+        x: Phaser.Math.Clamp(this.shrew.x + Math.cos(angle) * radius, 340, 1560),
+        y: Phaser.Math.Clamp(this.shrew.y + Math.sin(angle) * radius, 1040, 1340),
       }
 
       this.shrewPause = time + 500 + Math.abs(Math.sin(time)) * 800
@@ -490,6 +516,7 @@ export class VillageScene extends Phaser.Scene {
 
       if (distance > 8) {
         const step = Math.min(distance, delta * .065)
+
         this.shrew.x += dx / distance * step
         this.shrew.y += dy / distance * step
         this.shrew.setFlipX(dx < 0).setAngle(Math.sin(time * .025) * 1.5)
@@ -508,8 +535,8 @@ export class VillageScene extends Phaser.Scene {
     this.questHalo.setVisible(!game.quest)
 
     this.aldric
-      .setY(1010 + Math.sin(time * .002) * .35)
-      .setAngle(Math.sin(time * .0015) * .18)
+      .setY(1050 + Math.sin(time * .002) * .25)
+      .setAngle(Math.sin(time * .0015) * .12)
 
     this.moveShrew(time, Math.min(delta, 40))
 
@@ -519,7 +546,6 @@ export class VillageScene extends Phaser.Scene {
     }
 
     if (game.dialogue) {
-      this.velocity.scale(.65)
       this.positionEthan(time, false)
       return
     }
@@ -541,7 +567,7 @@ export class VillageScene extends Phaser.Scene {
       const toTargetY = this.destination.y - this.feet.y
       const distance = Math.hypot(toTargetX, toTargetY)
 
-      if (distance > 10) {
+      if (distance > 9) {
         inputX = toTargetX / distance
         inputY = toTargetY / distance
       } else {
@@ -549,47 +575,38 @@ export class VillageScene extends Phaser.Scene {
       }
     }
 
-    const inputLength = Math.hypot(inputX, inputY)
+    const length = Math.hypot(inputX, inputY)
 
-    if (inputLength > 0) {
-      inputX /= inputLength
-      inputY /= inputLength
+    if (length > 0) {
+      inputX /= length
+      inputY /= length
 
       if (Math.abs(inputX) > .15) {
         this.facing = inputX > 0 ? 1 : -1
       }
     }
 
-    const targetX = inputX * this.maxSpeed
-    const targetY = inputY * this.maxSpeed
     const dt = Math.min(delta, 40) / 1000
-    const smoothing = 1 - Math.exp(-11 * dt)
+    const step = this.moveSpeed * dt
 
-    this.velocity.x = Phaser.Math.Linear(this.velocity.x, targetX, smoothing)
-    this.velocity.y = Phaser.Math.Linear(this.velocity.y, targetY, smoothing)
+    this.movePlayer(inputX * step, inputY * step)
 
-    if (!inputLength && !this.destination && this.velocity.length() < 3) {
-      this.velocity.set(0, 0)
-    }
-
-    this.movePlayer(this.velocity.x * dt, this.velocity.y * dt)
-
-    const moving = this.velocity.lengthSq() > 25
+    const moving = length > 0
     this.positionEthan(time, moving)
 
     if (moving && time > this.nextDust) {
-      this.nextDust = time + 300
+      this.nextDust = time + 320
 
       const dust = this.add
-        .circle(this.feet.x, this.feet.y, 1.8, 0xd6bf90, .38)
+        .circle(this.feet.x, this.feet.y, 1.6, 0xd6bf90, .32)
         .setDepth(this.feet.y - 3)
 
       this.tweens.add({
         targets: dust,
         alpha: 0,
-        scale: 1.7,
+        scale: 1.6,
         y: dust.y - 4,
-        duration: 300,
+        duration: 280,
         onComplete: () => dust.destroy(),
       })
     }
